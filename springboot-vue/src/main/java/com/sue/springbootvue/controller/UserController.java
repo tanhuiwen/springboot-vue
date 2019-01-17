@@ -22,7 +22,6 @@ public class UserController {
             return ResultFactory.buildFailResult(String.format("登录失败，详细信息‘接收对象为空’"));
         }
         else if (userRepository.getByUsernameIs(user.getUsername())==null){
-
            if (userRepository.getByPhoneNumberIs(user.getUsername())==null){
                return ResultFactory.buildFailResult(String.format("登录失败，详细信息‘不存在该对象’"));
            }
