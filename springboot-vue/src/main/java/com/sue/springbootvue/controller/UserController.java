@@ -27,7 +27,7 @@ public class UserController {
            }
 
            else if (!userRepository.getByPhoneNumberIs(user.getUsername()).getPassword().equals(user.getPassword())){
-               return ResultFactory.buildFailResult(String.format("登录失败，‘密码错误’"));
+               return ResultFactory.buildFailResult(String.format("登录失败，详细信息‘密码错误’"));
            }
 
            else return ResultFactory.buildSuccessResult(userRepository.getByPhoneNumberIs(user.getUsername()));
