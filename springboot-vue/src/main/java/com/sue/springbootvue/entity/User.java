@@ -6,9 +6,9 @@ import javax.persistence.*;
 @Table(name = "user", schema = "springbootvue")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id", nullable = false, unique = true)
-    private int userId;//用户ID
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(nullable = false, unique = true)
+    private int id;//用户ID
     @Column
     private String username;//用户名
     @Column
@@ -22,12 +22,12 @@ public class User {
     @Column
     private Integer status=0;//状态
 
-    public int getUserId() {
-        return userId;
+    public int getId() {
+        return id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {

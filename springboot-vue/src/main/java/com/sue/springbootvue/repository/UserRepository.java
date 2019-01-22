@@ -35,10 +35,10 @@ public interface UserRepository extends JpaRepository<User,Integer> {
 
     /**
      * 根据用户名“删除”该用户（修改用户状态）
-     * @param username
+     * @param id
      * @return
      */
     @Modifying
-    @Query("update User user set user.status=1 where user.username=:username")
-    User delete(@Param("username") String username);
+    @Query("update User user set user.status=1 where user.id=:id")
+    User delete(@Param("id") int id);
 }
