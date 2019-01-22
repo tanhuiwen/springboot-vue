@@ -1,12 +1,13 @@
 package com.sue.springbootvue.entity;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "user", schema = "springbootvue")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, unique = true)
     private int id;//用户ID
     @Column
@@ -17,6 +18,8 @@ public class User {
     private String phoneNumber;//手机号码
     @Column
     private String email;//个人邮箱
+    @OneToMany(mappedBy = "userByUserId")
+    private Collection<UserAddress> userAddressesById;
     @Column
     private String department;//部门
     @Column
@@ -60,6 +63,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Collection<UserAddress> getUserAddressesById() {
+        return userAddressesById;
+    }
+
+    public void setUserAddressesById(Collection<UserAddress> userAddressesById) {
+        this.userAddressesById = userAddressesById;
     }
 
     public String getDepartment() {
