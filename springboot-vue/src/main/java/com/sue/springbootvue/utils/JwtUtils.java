@@ -8,19 +8,20 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class JwtUtil {
+public class JwtUtils {
     static final String SECRET = "ThisIsASecret";
 
-    public static String generateToken(String username) {
+    public static String generateToken(Integer id, String username) {
         HashMap<String, Object> map = new HashMap<>();
         //you can put any data in the map
+        map.put("id", id);
         map.put("username", username);
         String jwt = Jwts.builder()
                 .setClaims(map)
-                .setExpiration(new Date(System.currentTimeMillis() + 3600*8))// 8 hour
+                .setExpiration(new Date(System.currentTimeMillis() + 3600 * 8))// 8 hour
                 .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compact();
-        return "Bearer "+jwt; //jwt前面一般都会加Bearer
+        return "Bearer " + jwt; //jwt前面一般都会加Bearer
     }
 
     public static void validateToken(String token) {
@@ -28,19 +29,20 @@ public class JwtUtil {
             // parse the token.
             Map<String, Object> body = Jwts.parser()
                     .setSigningKey(SECRET)
-                    .parseClaimsJws(token.replace("Bearer ",""))
+                    .parseClaimsJws(token.replace("Bearer ", ""))
                     .getBody();
-        }catch (Exception e){
-            throw new IllegalStateException("Invalid Token. "+e.getMessage());
+        } catch (Exception e) {
+            throw new IllegalStateException("Invalid Token. " + e.getMessage());
         }
     }
+
     public Claims parseToken(String token) throws Exception {
-            Claims claims=Jwts.parser()//得到DefaultJwtParser
-                            .setSigningKey(SECRET)//设置签名的秘钥
-                            .parseClaimsJws(token)
-                            .getBody(); //设置需要解析的jwt
-             return claims;
-            }
+        Claims claims = Jwts.parser()//得到DefaultJwtParser
+                .setSigningKey(SECRET)//设置签名的秘钥
+                .parseClaimsJws(token)
+                .getBody(); //设置需要解析的jwt
+        return claims;
+    }
 
 }
 

@@ -1,5 +1,7 @@
 package com.sue.springbootvue.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -9,7 +11,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, unique = true)
-    private int id;//用户ID
+    private Integer id;//用户ID
     @Column
     private String username;//用户名
     @Column
@@ -18,14 +20,12 @@ public class User {
     private String phoneNumber;//手机号码
     @Column
     private String email;//个人邮箱
-    @OneToMany(mappedBy = "userByUserId")
-    private Collection<UserAddress> userAddressesById;
     @Column
     private String department;//部门
     @Column
-    private Integer status=0;//状态
+    private Integer status = 0;//状态
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -65,19 +65,13 @@ public class User {
         this.email = email;
     }
 
-    public Collection<UserAddress> getUserAddressesById() {
-        return userAddressesById;
-    }
-
-    public void setUserAddressesById(Collection<UserAddress> userAddressesById) {
-        this.userAddressesById = userAddressesById;
-    }
-
     public String getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) { this.department = department; }
+    public void setDepartment(String department) {
+        this.department = department;
+    }
 
     public Integer getStatus() {
         return status;
@@ -87,3 +81,4 @@ public class User {
         status = status;
     }
 }
+

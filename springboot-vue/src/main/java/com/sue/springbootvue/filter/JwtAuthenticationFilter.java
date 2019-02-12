@@ -1,6 +1,6 @@
 package com.sue.springbootvue.filter;
 
-import com.sue.springbootvue.utils.JwtUtil;
+import com.sue.springbootvue.utils.JwtUtils;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -21,7 +21,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             if (isProtectedUrl(request)) {
                 String token = request.getHeader("Authorization");
                 //检查jwt令牌, 如果令牌不合法或者过期, 里面会直接抛出异常, 下面的catch部分会直接返回
-                JwtUtil.validateToken(token);
+                JwtUtils.validateToken(token);
             }
         } catch (Exception e) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, e.getMessage());
